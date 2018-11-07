@@ -38,6 +38,7 @@ import expo.modules.permissions.PermissionsPackage;
 import expo.modules.sensors.SensorsPackage;
 import expo.modules.sms.SMSPackage;
 import expo.modules.localization.LocalizationPackage;
+import expo.modules.bluetooth.BluetoothPackage;
 import host.exp.exponent.ExponentManifest;
 import host.exp.exponent.analytics.EXL;
 import host.exp.exponent.kernel.ExperienceId;
@@ -102,6 +103,7 @@ import static host.exp.exponent.kernel.KernelConstants.LINKING_URI_KEY;
 
 public class ExponentPackage implements ReactPackage {
   private static final List<Package> EXPO_MODULES_PACKAGES = Arrays.<Package>asList(
+      new BluetoothPackage(),
       new CameraPackage(),
       new SensorsPackage(),
       new FileSystemPackage(),

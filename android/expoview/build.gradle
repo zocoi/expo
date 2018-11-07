@@ -181,6 +181,7 @@ dependencies {
   api project(':expo-ads-admob')
   api project(':expo-local-authentication')
   api project(':expo-localization')
+  api project(':expo-bluetooth')
 
   // Versioned react native
   // WHEN_PREPARING_SHELL_REMOVE_FROM_HERE
