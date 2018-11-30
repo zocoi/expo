@@ -6,6 +6,7 @@ import { NativeModulesProxy } from 'expo-core';
 import { SharedEventEmitter, ModuleBase, utils } from 'expo-firebase-app';
 
 import type { App } from 'expo-firebase-app';
+import { TaskEvent, TaskState } from './constants';
 import StorageRef from './reference';
 
 const { stripTrailingSlash } = utils;
@@ -21,16 +22,8 @@ export const NAMESPACE = 'storage';
 const { [MODULE_NAME]: FirebaseStorage } = NativeModulesProxy;
 
 export const statics = {
-  TaskEvent: {
-    STATE_CHANGED: 'state_changed',
-  },
-  TaskState: {
-    RUNNING: 'running',
-    PAUSED: 'paused',
-    SUCCESS: 'success',
-    CANCELLED: 'cancelled',
-    ERROR: 'error',
-  },
+  TaskEvent,
+  TaskState,
   Native: FirebaseStorage
     ? {
         MAIN_BUNDLE_PATH: stripTrailingSlash(FirebaseStorage.MAIN_BUNDLE_PATH),

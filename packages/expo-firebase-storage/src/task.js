@@ -4,43 +4,20 @@
  */
 import { utils } from 'expo-firebase-app';
 import invariant from 'invariant';
-import { statics as StorageStatics } from '.';
 
-type Storage = object;
-type StorageReference = object;
+import { TaskEvent } from './constants';
+import {
+  Storage,
+  NextOrObserverType,
+  FuncErrorType,
+  StorageReference,
+  FuncSnapshotType,
+} from './types';
 
 export const UPLOAD_TASK = 'upload';
 export const DOWNLOAD_TASK = 'download';
 
 const { isFunction } = utils;
-
-declare type UploadTaskSnapshotType = {
-  bytesTransferred: number,
-  downloadURL: string | null,
-  metadata: Object, // TODO flow type def for https://firebase.google.com/docs/reference/js/firebase.storage.FullMetadata.html
-  ref: StorageReference,
-  state:
-    | typeof StorageStatics.TaskState.RUNNING
-    | typeof StorageStatics.TaskState.PAUSED
-    | typeof StorageStatics.TaskState.SUCCESS
-    | typeof StorageStatics.TaskState.CANCELLED
-    | typeof StorageStatics.TaskState.ERROR,
-  task: StorageTask,
-  totalBytes: number,
-};
-
-declare type FuncSnapshotType = null | ((snapshot: UploadTaskSnapshotType) => any);
-
-declare type FuncErrorType = null | ((error: Error) => any);
-
-declare type NextOrObserverType =
-  | null
-  | {
-      next?: FuncSnapshotType,
-      error?: FuncErrorType,
-      complete?: FuncSnapshotType,
-    }
-  | FuncSnapshotType;
 
 /**
  * @url https://firebase.google.com/docs/reference/js/firebase.storage.UploadTask
@@ -128,7 +105,7 @@ export default class StorageTask {
     }
 
     if (_next) {
-      this.storage._addListener(this.path, StorageStatics.TaskEvent.STATE_CHANGED, _next);
+      this.storage._addListener(this.path, TaskEvent.STATE_CHANGED, _next);
     }
     if (_error) {
       this.storage._addListener(this.path, `${this.type}_failure`, _error);
@@ -138,8 +115,7 @@ export default class StorageTask {
     }
 
     return () => {
-      if (_next)
-        this.storage._removeListener(this.path, StorageStatics.TaskEvent.STATE_CHANGED, _next);
+      if (_next) this.storage._removeListener(this.path, TaskEvent.STATE_CHANGED, _next);
       if (_error) this.storage._removeListener(this.path, `${this.type}_failure`, _error);
       if (_complete) this.storage._removeListener(this.path, `${this.type}_success`, _complete);
     };
@@ -154,17 +130,15 @@ export default class StorageTask {
    * @returns {function()}
    */
   on(
-    event: string = StorageStatics.TaskEvent.STATE_CHANGED,
+    event: string = TaskEvent.STATE_CHANGED,
     nextOrObserver: NextOrObserverType,
     error: FuncErrorType,
     complete: FuncSnapshotType
   ): Function {
     invariant(event, "StorageTask.on listener is missing required string argument 'event'.");
     invariant(
-      event === StorageStatics.TaskEvent.STATE_CHANGED,
-      `StorageTask.on event argument must be a string with a value of '${
-        StorageStatics.TaskEvent.STATE_CHANGED
-      }'`
+      event === TaskEvent.STATE_CHANGED,
+      `StorageTask.on event argument must be a string with a value of '${TaskEvent.STATE_CHANGED}'`
     );
 
     // if only event provided return the subscriber function

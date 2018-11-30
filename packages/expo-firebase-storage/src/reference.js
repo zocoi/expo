@@ -6,7 +6,7 @@ import { ReferenceBase } from 'expo-firebase-app';
 
 import StorageTask, { DOWNLOAD_TASK, UPLOAD_TASK } from './task';
 
-type Storage = object;
+import { Storage } from './types';
 
 /**
  * @url https://firebase.google.com/docs/reference/js/firebase.storage.Reference
