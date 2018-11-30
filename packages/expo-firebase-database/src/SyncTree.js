@@ -5,7 +5,7 @@ import { EventEmitter, NativeModulesProxy } from 'expo-core';
 import { SharedEventEmitter, utils } from 'expo-firebase-app';
 
 import DataSnapshot from './DataSnapshot';
-import DatabaseReference from './Reference';
+import { DatabaseReference } from './types';
 
 const { isString, nativeToJSError } = utils;
 

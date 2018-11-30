@@ -16,3 +16,5 @@ export type DatabaseModule = {
   (): Database,
   nativeModuleExists: boolean,
 } & DatabaseStatics;
+
+export type DatabaseReference = object;
