@@ -110,8 +110,12 @@ class Camera1 extends CameraViewImpl implements MediaRecorder.OnInfoListener,
             @Override
             public void onSurfaceChanged() {
                 if (mCamera != null) {
-                    setUpPreview();
-                    adjustCameraParameters();
+                    try {
+                      setUpPreview();
+                      adjustCameraParameters();
+                    } catch (RuntimeException e) {
+                      e.printStackTrace();
+                    }
                 }
             }
 

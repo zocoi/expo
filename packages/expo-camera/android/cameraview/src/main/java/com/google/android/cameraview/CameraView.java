@@ -105,7 +105,7 @@ public class CameraView extends FrameLayout {
         // Internal setup
         final PreviewImpl preview = createPreviewImpl(context);
         mCallbacks = new CallbackBridge();
-        if (fallbackToOldApi || Build.VERSION.SDK_INT < 21) {
+        if (fallbackToOldApi) {
             mImpl = new Camera1(mCallbacks, preview);
         } else if (Build.VERSION.SDK_INT < 23) {
             mImpl = new Camera2(mCallbacks, preview, context);
@@ -124,13 +124,7 @@ public class CameraView extends FrameLayout {
 
     @NonNull
     private PreviewImpl createPreviewImpl(Context context) {
-        PreviewImpl preview;
-        if (Build.VERSION.SDK_INT < 14) {
-            preview = new SurfaceViewPreview(context, this);
-        } else {
-            preview = new TextureViewPreview(context, this);
-        }
-        return preview;
+        return new TextureViewPreview(context, this);
     }
 
     @Override
@@ -244,10 +238,6 @@ public class CameraView extends FrameLayout {
     }
 
     public void setUsingCamera2Api(boolean useCamera2) {
-        if (Build.VERSION.SDK_INT < 21) {
-          return;
-        }
-
         boolean wasOpened = isCameraOpened();
         Parcelable state = onSaveInstanceState();
 

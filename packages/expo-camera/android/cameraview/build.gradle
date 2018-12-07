@@ -1,0 +1,51 @@
+buildscript {
+  repositories {
+    google()
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.2.1'
+  }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+group = 'com.google.android'
+version = '1.0.1'
+
+android {
+  compileSdkVersion 27
+
+  defaultConfig {
+    minSdkVersion 21
+    targetSdkVersion 26
+    versionCode 2
+    versionName '1.0.1'
+  }
+
+  lintOptions {
+    abortOnError false
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/base'
+    main.java.srcDirs += 'src/main/api9'
+    main.java.srcDirs += 'src/main/api14'
+    main.java.srcDirs += 'src/main/api21'
+    main.java.srcDirs += 'src/main/api23'
+  }
+}
+
+repositories {
+  mavenCentral()
+  maven {
+    url '$projectDir/maven'
+  }
+}
+
+dependencies {
+  implementation 'com.android.support:support-annotations:27.1.1'
+  implementation 'com.android.support:support-v4:27.1.1'
+  implementation 'com.android.support:appcompat-v7:27.1.1'
+}

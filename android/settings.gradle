@@ -63,3 +63,7 @@ def includeUniversalModule = { name ->
   'expo-sensors-interface',
   'expo-sms',
 ].forEach({ moduleName -> includeUniversalModule(moduleName) })
+
+// expo-camera dependency
+include ":cameraview"
+project(":cameraview").projectDir = new File(modulesDir, "expo-camera/android/cameraview")

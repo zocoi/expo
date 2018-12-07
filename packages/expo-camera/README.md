@@ -23,6 +23,8 @@ and run `pod install`.
    ```gradle
    include ':expo-camera'
    project(':expo-camera').projectDir = new File(rootProject.projectDir, '../node_modules/expo-camera/android')
+   include ":cameraview"
+   project(":cameraview").projectDir = new File(modulesDir, "../node_modules/expo-camera/android/cameraview")
    ```
    and if not already included
    ```gradle

@@ -74,6 +74,7 @@ public class ExpoCameraView extends CameraView implements LifecycleEventListener
 
   public ExpoCameraView(Context themedReactContext, ModuleRegistry moduleRegistry) {
     super(themedReactContext, true);
+
     mModuleRegistry = moduleRegistry;
     initBarCodeScanner();
 
@@ -88,6 +89,11 @@ public class ExpoCameraView extends CameraView implements LifecycleEventListener
       @Override
       public void onMountError(CameraView cameraView) {
         CameraViewHelper.emitMountErrorEvent(mModuleRegistry.getModule(EventEmitter.class), cameraView, "Camera component could not be rendered - is there any other instance running?");
+      }
+
+      @Override
+      public void onCameraClosed(CameraView cameraView) {
+        super.onCameraClosed(cameraView);
       }
 
       @Override

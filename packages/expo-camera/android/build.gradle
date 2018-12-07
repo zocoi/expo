@@ -71,7 +71,7 @@ dependencies {
   expendency 'expo-file-system-interface'
   expendency 'expo-image-loader-interface'
   expendency 'expo-camera-interface'
+  implementation project(':cameraview')
   implementation 'com.google.android.gms:play-services-vision:15.0.2'
   implementation 'com.android.support:exifinterface:26.1.0'
-  implementation 'com.google.android:cameraview:1.0.0'
 }

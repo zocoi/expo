@@ -17,6 +17,8 @@ import expo.core.interfaces.services.UIManager;
 import expo.interfaces.barcodescanner.BarCodeScannerSettings;
 
 public class CameraViewManager extends ViewManager<ExpoCameraView> implements ModuleRegistryConsumer {
+
+
   public enum Events {
     EVENT_CAMERA_READY("onCameraReady"),
     EVENT_ON_MOUNT_ERROR("onMountError"),
@@ -37,6 +39,7 @@ public class CameraViewManager extends ViewManager<ExpoCameraView> implements Mo
     }
   }
 
+  private ExpoCameraView mCurrentExpoCameraView;
   private static final String REACT_CLASS = "ExponentCamera";
   private ModuleRegistry mModuleRegistry;
 
@@ -49,6 +52,7 @@ public class CameraViewManager extends ViewManager<ExpoCameraView> implements Mo
   public void onDropViewInstance(ExpoCameraView view) {
     mModuleRegistry.getModule(UIManager.class).unregisterLifecycleEventListener(view);
     view.stop();
+    mCurrentExpoCameraView = null;
   }
 
   @Override
@@ -63,7 +67,12 @@ public class CameraViewManager extends ViewManager<ExpoCameraView> implements Mo
 
   @Override
   public ExpoCameraView createViewInstance(Context context) {
-    return new ExpoCameraView(context, mModuleRegistry);
+    if (mCurrentExpoCameraView != null) {
+      mCurrentExpoCameraView.stop();
+    }
+
+    mCurrentExpoCameraView = new ExpoCameraView(context, mModuleRegistry);
+    return mCurrentExpoCameraView;
   }
 
   @Override
