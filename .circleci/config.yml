@@ -248,6 +248,8 @@ jobs:
       - fetch_cocoapods_specs
       - yarn_install:
           working_directory: ~/project/tools-public
+      - run: mkdir -p ~/.expo
+      - run: direnv exec . bash -c 'echo $PATH' > ~/.expo/PATH
       - run: fastlane ios create_simulator_build
       - store_artifacts:
           path: ~/Library/Logs/fastlane/

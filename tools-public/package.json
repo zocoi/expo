@@ -37,6 +37,7 @@
     "xdl": "52.0.12"
   },
   "devDependencies": {
+    "expo-cli": "^2.6.14",
     "jest": "^23.5.0"
   }
 }
