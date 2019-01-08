@@ -6,6 +6,8 @@ This is the log of notable changes to the Expo client that are developer-facing.
 
 ### 🛠 Breaking changes
 
+- corrected behavior of splash screen image based on `resizeMode` in Android standalone apps (`contain` and `cover` were handled contrary to what docs state) by [@bbarthec](https://github.com/bbarthec) ([#3029](https://github.com/expo/expo/pull/3029))
+
 ### 🎉 New features
 
 ### 🐛 Bug fixes
