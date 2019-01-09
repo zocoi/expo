@@ -1,2 +1,2 @@
-import { NativeModules } from 'react-native';
-export default NativeModules.ExponentImagePicker;
+import { NativeModulesProxy } from 'expo-core';
+export default NativeModulesProxy.ExponentImagePicker;

@@ -70,8 +70,8 @@ dependencies {
   expendency "expo-core"
   compile project(path: ':expo-permissions-interface')
   api 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
-  compile "com.android.support:support-v4:27.1.0"
+  api "com.android.support:support-v4:27.1.0"
   api 'com.facebook.fresco:fresco:1.10.0'
   api 'commons-codec:commons-codec:1.10'
-  compile group: 'commons-io', name: 'commons-io', version: '2.6'
+  api group: 'commons-io', name: 'commons-io', version: '2.6'
 }

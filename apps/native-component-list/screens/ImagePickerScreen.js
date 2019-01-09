@@ -20,6 +20,7 @@ export default class ImagePickerScreen extends React.Component {
 
   render() {
     const showCamera = async () => {
+      console.log("absent?", !ImagePicker, "val ", ImagePicker);
       let result = await ImagePicker.launchCameraAsync({});
       if (result.cancelled) {
         this.setState({ selection: null });

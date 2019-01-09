@@ -27,7 +27,7 @@ import * as Font from 'expo-font';
 export { Font };
 export { GLView } from 'expo-gl';
 export { GoogleSignIn } from 'expo-google-sign-in';
-import ImagePicker from 'expo-image-picker';
+import { ImagePicker } from 'expo-image-picker';
 export { ImagePicker };
 export { LocalAuthentication } from 'expo-local-authentication';
 export { Localization } from 'expo-localization';

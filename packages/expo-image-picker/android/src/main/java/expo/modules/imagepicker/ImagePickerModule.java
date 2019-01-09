@@ -88,7 +88,8 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
   private Boolean exif = false;
   private String mExperienceId;
   private WeakReference<Activity> mExperienceActivity;
-
+  private boolean mInitialized = false;
+  
   private Context mContext;
   private ModuleRegistry mModuleRegistry;
 
@@ -132,19 +133,19 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
       return;
     }
 
-    if (mExperienceActivity.get() == null) {
+    if (getExperienceActivity() == null) {
       promise.reject(MISSING_ACTIVITY, MISSING_ACTIVITY_MESSAGE);
       return;
     }
 
     final Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-    if (cameraIntent.resolveActivity(mExperienceActivity.get().getApplication().getPackageManager()) == null) {
+    if (cameraIntent.resolveActivity(getApplication(null).getPackageManager()) == null) {
       promise.reject(new IllegalStateException("Error resolving activity"));
       return;
     }
 
-    Permissions permissionsModule = (Permissions) mModuleRegistry.getExportedModuleOfClass(Permissions.class);
+    Permissions permissionsModule = mModuleRegistry.getModule(Permissions.class);
 
     String permissionsTable[] = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
 
@@ -175,12 +176,12 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
     }
     mCameraCaptureURI = ExpFileUtils.uriFromFile(imageFile);
 
-    if (mExperienceActivity.get() == null) {
+    if (getExperienceActivity() == null) {
       promise.reject(MISSING_ACTIVITY, MISSING_ACTIVITY_MESSAGE);
       return;
     }
 
-    Application application = mExperienceActivity.get().getApplication();
+    Application application = getExperienceActivity().getApplication();
 
     // fix for Permission Denial in Android < 21
     List<ResolveInfo> resolvedIntentActivities = application
@@ -222,6 +223,8 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
       libraryIntent.setType("image/*");
     }
 
+    mPromise = promise;
+    
     libraryIntent.setAction(Intent.ACTION_GET_CONTENT);
     startActivityOnResult(libraryIntent, REQUEST_LAUNCH_IMAGE_LIBRARY, promise);
   }
@@ -276,11 +279,11 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
           final Uri uri = requestCode == REQUEST_LAUNCH_CAMERA ? mCameraCaptureURI : intent.getData();
           final Bundle exifData = exif ? readExif(uri, promise) : null;
 
-          if (mExperienceActivity.get() == null) {
+          if (getExperienceActivity() == null) {
             promise.reject(MISSING_ACTIVITY, MISSING_ACTIVITY_MESSAGE);
             return;
           }
-          String type = mExperienceActivity.get().getApplication().getContentResolver().getType(uri);
+          String type = getExperienceActivity().getApplication().getContentResolver().getType(uri);
 
           // previous method sometimes returns null
           if (type == null) {
@@ -325,7 +328,7 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
                   .setOutputUri(fileUri)
                   .setOutputCompressFormat(compressFormat)
                   .setOutputCompressQuality(quality == null ? DEFAULT_QUALITY : quality)
-                  .start(mExperienceActivity.get());
+                  .start(getExperienceActivity());
             } else {
               ImageRequest imageRequest =
                   ImageRequestBuilder
@@ -720,16 +723,23 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
   @Override
   public void setModuleRegistry(ModuleRegistry moduleRegistry) {
     mModuleRegistry = moduleRegistry;
-    ActivityProvider activityProvider = (ActivityProvider) moduleRegistry.getExportedModuleOfClass(ActivityProvider.class);
-    mExperienceActivity = new WeakReference<Activity>(activityProvider.getCurrentActivity());
+  }
+  
+  private Activity getExperienceActivity() {
+    if (!mInitialized) {
+      mInitialized = true;
+      ActivityProvider activityProvider = mModuleRegistry.getModule(ActivityProvider.class);
+      mExperienceActivity = new WeakReference<>(activityProvider.getCurrentActivity());
 
-    UIManager uiManager = (UIManager) moduleRegistry.getExportedModuleOfClass(UIManager.class);
-    uiManager.registerActivityEventListener(this);
+      UIManager uiManager = mModuleRegistry.getModule(UIManager.class);
+      uiManager.registerActivityEventListener(this);
+    }
+    return mExperienceActivity.get();
   }
 
   @Override
   public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-    if (mExperienceActivity.get() != null && activity == mExperienceActivity.get()) {
+    if (getExperienceActivity() != null && activity == getExperienceActivity()) {
       this.onActivityResult(requestCode, resultCode, data); // another function
     }
   }
@@ -740,8 +750,8 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
   }
 
   private void startActivityOnResult(Intent intent, int requestCode, Promise promise) {
-    if (mExperienceActivity.get() != null) {
-      mExperienceActivity.get().startActivityForResult(intent, requestCode);
+    if (getExperienceActivity() != null) {
+      getExperienceActivity().startActivityForResult(intent, requestCode);
     } else {
       promise.reject(MISSING_ACTIVITY,
           MISSING_ACTIVITY_MESSAGE);
@@ -749,13 +759,13 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
   }
 
   private Application getApplication(Promise promise) {
-    if (mExperienceActivity.get() == null) {
+    if (getExperienceActivity() == null) {
       if (promise != null) {
         promise.reject(MISSING_ACTIVITY, MISSING_ACTIVITY_MESSAGE);
       }
       return null;
     } else {
-      return mExperienceActivity.get().getApplication();
+      return getExperienceActivity().getApplication();
     }
   }
 

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/index.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,WAAW,MAAM,2BAA2B,CAAC;AACzD,OAAO,EAAE,WAAW,EAAE,CAAC","sourcesContent":["import * as ImagePicker from './ImagePicker/ImagePicker';\nexport { ImagePicker };\n"]}
