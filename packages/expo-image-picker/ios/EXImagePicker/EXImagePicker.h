@@ -1,11 +1,12 @@
-#import "EXScopedBridgeModule.h"
+#import <EXCore/EXExportedModule.h>
+#import <EXCore/EXModuleRegistryConsumer.h>
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, RNImagePickerTarget) {
-  RNImagePickerTargetCamera = 1,
-  RNImagePickerTargetLibrarySingleImage,
+typedef NS_ENUM(NSInteger, EXImagePickerTarget) {
+  EXImagePickerTargetCamera = 1,
+  EXImagePickerTargetLibrarySingleImage,
 };
 
-@interface EXImagePicker : EXScopedBridgeModule <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface EXImagePicker : EXExportedModule <UINavigationControllerDelegate, UIImagePickerControllerDelegate, EXModuleRegistryConsumer>
 
 @end

@@ -224,7 +224,7 @@ public class ImagePickerModule extends ExportedModule implements ModuleRegistryC
     }
 
     mPromise = promise;
-    
+
     libraryIntent.setAction(Intent.ACTION_GET_CONTENT);
     startActivityOnResult(libraryIntent, REQUEST_LAUNCH_IMAGE_LIBRARY, promise);
   }
