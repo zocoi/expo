@@ -120,7 +120,7 @@ to upload your own certificates, we recommend following [this excellent guide on
 **Note:** this guide recommends leaving the P12's password blank, but a P12 password
 is required to upload your own certificate to Expo's service. Please enter a password
 when prompted. We'll ask you similar questions about your choice regarding
-Push Notifications service key. Remember that Push Notifications service keys
+your Push Notifications service key (P8 file). Remember that Push Notifications service keys
 can be reused across different Expo apps as well.
 
 > **Note:** The Expo build service supports both normal App Store distribution as well as enterprise
