@@ -29,9 +29,6 @@ public class LinearGradientManager extends ViewManager<LinearGradientView> {
     return ViewManagerType.SIMPLE;
   }
 
-  /* Setters */
-
-
   @ExpoProp(name = PROP_COLORS)
   public void setColors(LinearGradientView view, final ArrayList<Double> colors) {
     view.setColors(colors);
