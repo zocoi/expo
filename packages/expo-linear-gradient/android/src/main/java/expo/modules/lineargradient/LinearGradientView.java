@@ -70,6 +70,8 @@ public class LinearGradientView extends View {
   }
 
   // Copied from RN PixelUtil
+  // We might want to expose display metrics on expo-core somewhere to avoid
+  // having code similar to this littered throughout modules
   private float toPixelFromDIP(float value) {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
@@ -77,7 +79,6 @@ public class LinearGradientView extends View {
         getContext().getResources().getDisplayMetrics()
     );
   }
-
 
   @Override
   protected void onSizeChanged(int w, int h, int oldw, int oldh) {
