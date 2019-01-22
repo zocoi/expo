@@ -1,0 +1,1 @@
+../../../../../packages/expo-haptics/ios/EXHaptics/EXHapticsView.h

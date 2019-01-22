@@ -397,6 +397,8 @@ PODS:
   - EXGoogleSignIn (2.0.0):
     - EXCore
     - GoogleSignIn (~> 4.4)
+  - EXHaptics (1.0.0):
+    - EXCore
   - EXImageLoaderInterface (2.0.0):
     - EXCore
   - EXLocalAuthentication (2.0.0):
@@ -434,8 +436,6 @@ PODS:
   - EXSensorsInterface (2.0.0):
     - EXCore
   - EXSMS (2.0.0):
-    - EXCore
-  - EXSpeech (1.0.0):
     - EXCore
   - EXSQLite (1.0.0):
     - EXCore
@@ -1286,6 +1286,7 @@ DEPENDENCIES:
   - EXGL (from `../packages/expo-gl/ios`)
   - EXGL-CPP (from `../packages/expo-gl-cpp/cpp`)
   - EXGoogleSignIn (from `../packages/expo-google-sign-in/ios`)
+  - EXHaptics (from `../packages/expo-haptics/ios`)
   - EXImageLoaderInterface (from `../packages/expo-image-loader-interface/ios`)
   - EXLocalAuthentication (from `../packages/expo-local-authentication/ios`)
   - EXLocalization (from `../packages/expo-localization/ios`)
@@ -1300,7 +1301,6 @@ DEPENDENCIES:
   - EXSensors (from `../packages/expo-sensors/ios`)
   - EXSensorsInterface (from `../packages/expo-sensors-interface/ios`)
   - EXSMS (from `../packages/expo-sms/ios`)
-  - EXSpeech (from `../packages/expo-speech/ios`)
   - EXSQLite (from `../packages/expo-sqlite/ios`)
   - EXTaskManager (from `../packages/expo-task-manager/ios`)
   - EXTaskManagerInterface (from `../packages/expo-task-manager-interface/ios`)
@@ -1740,6 +1740,8 @@ EXTERNAL SOURCES:
     :path: "../packages/expo-gl-cpp/cpp"
   EXGoogleSignIn:
     :path: "../packages/expo-google-sign-in/ios"
+  EXHaptics:
+    :path: "../packages/expo-haptics/ios"
   EXImageLoaderInterface:
     :path: "../packages/expo-image-loader-interface/ios"
   EXLocalAuthentication:
@@ -1768,8 +1770,6 @@ EXTERNAL SOURCES:
     :path: "../packages/expo-sensors-interface/ios"
   EXSMS:
     :path: "../packages/expo-sms/ios"
-  EXSpeech:
-    :path: "../packages/expo-speech/ios"
   EXSQLite:
     :path: "../packages/expo-sqlite/ios"
   EXTaskManager:
@@ -1955,6 +1955,7 @@ SPEC CHECKSUMS:
   EXGL: 9a5dd454a7ed9660b25b71d82d8009ac9bd6f85a
   EXGL-CPP: 46b589a3ed0c59ae2e7f9434897b66cd8dd2e70c
   EXGoogleSignIn: 646a6097f0e6ca5c4812b5dc2fcda1979ad9d333
+  EXHaptics: fd08f1e2a9d7722f031f6da4036aad1a57ad37c9
   EXImageLoaderInterface: 3f460f6ff344ba6c4e00621806c0d1d76249cd8f
   EXLocalAuthentication: b70696613cb24d726d3c98a1818c22c481a46b01
   EXLocalization: 1243adc132eaad4793dd7e5b497135ad5d803441
@@ -1969,7 +1970,6 @@ SPEC CHECKSUMS:
   EXSensors: 6aa3b3b9906beb0b574a88943d171ebc226b0fe5
   EXSensorsInterface: 9e845bc03ad23a846fa6bcd4e2a60f1d0b1a6906
   EXSMS: 2a2f1abfb2f37b686e892261678c70f39c9b7fa8
-  EXSpeech: ce84a1b607b39840e42cfeddbc82e2408734d05a
   EXSQLite: 0a4c0e7bf79f4210743fc6cc8d282bd34d79fdac
   EXTaskManager: c4b3dd6936b827b040899a33e9788b42b17d5c25
   EXTaskManagerInterface: f9869b0f902ba7ccead16e0768c6dd75603163e0
@@ -2010,6 +2010,6 @@ SPEC CHECKSUMS:
   yogaABI31_0_0: 7978689ddccec43cffd5914889304cf3b7fd7c77
   yogaABI32_0_0: b6e0ba3796cd5e47ccea0454694e605a1cfc817a
 
-PODFILE CHECKSUM: 37ade6e2666885d2d681eec82a07e6f5d936cc7a
+PODFILE CHECKSUM: 1fe2943ab5d61654ee5af37c045861ad4b316761
 
 COCOAPODS: 1.5.3
