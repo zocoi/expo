@@ -40,10 +40,9 @@ Apps are served from Expo CLI through a tunnel service by default (we currently 
 
 - Expo streams your device logs to Expo CLI and Expo Dev Tools so you don't need to run `adb logcat` or the iOS equivalent -- the `console.log / warn /error` messages from any device that is connected to your app will show up automatically in your terminal and Expo Dev Tools.
 
-## What Expo Can't Do
+## What Expo can't do
 
-- Sometimes Expo doesn't provide access to a native module or API you might need. In this case, you can [eject](../../expokit/eject/) and use `ExpoKit` instead. This allows you to continue using Expo's foundation but allowing you to create and use any custom native modules.
-- [Read more about `eject` here](../../expokit/eject/)
+- See [Why not Expo?](../introduction/why-not-expo/) for more information.
 
 ## Deploying to the App / Play Store
 
@@ -53,15 +52,16 @@ If you prefer to build your app on your own machine, you can [follow these steps
 
 ## Helpful Tools & Resources
 
-- [Expo Snack](https://snack.expo.io)
-  - The best way to test and share Expo features directly from your browser. Point your phone at the QR code and you have a sandbox environment you can build in the browser and test directly on your device.
-- [Expo Docs](/versions/latest/)
+- [snack.expo.io](https://snack.expo.io)
+  - The best way to test and share examples and small projects directly from your browser. Point your phone at the QR code and you have a sandbox environment you can build in the browser and test directly on your device.
+- [docs.expo.io](/versions/latest/)
   - If there's something you don't understand or wish to learn more about, this is a great place to start.
-- [Expo Forums](https://forums.expo.io)
+- [forums.expo.io](https://forums.expo.io)
   - The fastest way to get help from the Expo team or community
-- [Expo Github](https://github.com/expo)
+- [github.com/expo](https://github.com/expo)
   - The Expo Client and SDK are all open source. If there's something you'd like to fix, or figure out how we implement our native modules, you're welcome to look through the code yourself!
-- [Expo Slack](https://slack.expo.io)
+- [Slack](https://slack.expo.io)
+  - Chat with other folks who use Expo.
 
 ## Useful Commands
 
